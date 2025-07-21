@@ -1,0 +1,59 @@
+{
+  "embedding_models": {
+    "openai-3-large": {
+      "model": "text-embedding-3-large",
+      "dimensions": 3072,
+      "max_tokens": 8191,
+      "cost_per_1k": 0.00013
+    },
+    "openai-3-small": {
+      "model": "text-embedding-3-small",
+      "dimensions": 1536,
+      "max_tokens": 8191,
+      "cost_per_1k": 0.00002
+    },
+    "openai-ada-002": {
+      "model": "text-embedding-ada-002",
+      "dimensions": 1536,
+      "max_tokens": 8191,
+      "cost_per_1k": 0.0001
+    }
+  },
+  "recommended_settings": {
+    "development": {
+      "model": "openai-3-small",
+      "batch_size": 50,
+      "max_records": 100,
+      "description": "Cost-effective for testing and development"
+    },
+    "production": {
+      "model": "openai-3-large",
+      "batch_size": 100,
+      "max_records": null,
+      "description": "Best quality embeddings for production use"
+    }
+  },
+  "environment_variables": {
+    "required": [
+      "OPENAI_API_KEY"
+    ],
+    "optional": [
+      "SUPABASE_URL",
+      "SUPABASE_KEY"
+    ]
+  },
+  "usage_examples": {
+    "basic": "python3 generate_embeddings.py",
+    "with_model": "python3 generate_embeddings.py --model openai-3-large",
+    "test_mode": "python3 generate_embeddings.py --max-records 10",
+    "update_only": "python3 generate_embeddings.py --update-only",
+    "custom_batch": "python3 generate_embeddings.py --batch-size 50"
+  },
+  "cost_estimates": {
+    "full_dataset_small": "$6.49",
+    "full_dataset_large": "$42.18",
+    "test_100_records_small": "$0.03",
+    "note": "Costs are estimates based on 3.2M words in dataset"
+  }
+}
+

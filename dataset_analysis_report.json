@@ -1,0 +1,48 @@
+{
+  "dataset_info": {
+    "filename": "nelson_pediatric_knowledge_rag.csv",
+    "total_records": 2206,
+    "total_words": 3244297,
+    "total_characters": 22536730,
+    "specialties_count": 25,
+    "analysis_date": "2025-07-21T18:10:45.236455"
+  },
+  "quality_metrics": {
+    "average_quality_score": 99.87873980054397,
+    "average_words_per_chunk": 1470.66953762466,
+    "unique_medical_entities": 12921,
+    "data_completeness": 100.0
+  },
+  "specialties": {
+    "Allergic Disorder": 63,
+    "Behavioural & pyschatrical disorder": 62,
+    "Bone and Joint Disorders": 126,
+    "Digestive system": 203,
+    "Diseases of the Blood": 110,
+    "Ear": 31,
+    "Fluid &electrolyte disorder": 40,
+    "Growth development & behaviour": 61,
+    "Gynecologic History and  Physical Examination": 29,
+    "Humangenetics": 45,
+    "Neuromuscular Disorders": 113,
+    "Nutrition": 61,
+    "Rehabilitation Medicine": 73,
+    "Rheumatic Disease": 67,
+    "Skin": 102,
+    "The Cardiovascular System": 127,
+    "The Endocrine System": 140,
+    "The Nervous System": 155,
+    "The Respiratory System": 156,
+    "Urology": 37,
+    "aldocent medicine": 68,
+    "cancer & benign tumor": 66,
+    "immunology": 73,
+    "learning & developmental disorder": 66,
+    "metabolic disorder": 132
+  },
+  "embedding_cost_estimates": {
+    "OpenAI text-embedding-3-small": 0.08435172200000002,
+    "OpenAI text-embedding-3-large": 0.548286193,
+    "OpenAI text-embedding-ada-002": 0.4217586100000001
+  }
+}
