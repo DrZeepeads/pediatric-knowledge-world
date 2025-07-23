@@ -1,19 +1,121 @@
-# Nelson-GPT Pediatric Knowledge RAG Pipeline
+# 🩺 NelsonGPT - Pediatric Medical Assistant
 
-🏥 **Smart Pediatric Assistant powered by Nelson's Textbook of Pediatrics**
+A fully responsive, modern AI chat application designed specifically for pediatric healthcare professionals. Built with React 19, TypeScript, and powered by the Nelson Textbook of Pediatrics through advanced RAG (Retrieval Augmented Generation) technology.
 
-This repository contains processed pediatric knowledge data optimized for RAG (Retrieval-Augmented Generation) pipelines, specifically designed for Nelson-GPT - an AI assistant that provides authentic medical knowledge to doctors, pediatricians, and residents with proper citations.
+![NelsonGPT](https://img.shields.io/badge/NelsonGPT-v1.0.0-blue)
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue)
+![PWA](https://img.shields.io/badge/PWA-Ready-green)
+![Medical](https://img.shields.io/badge/Medical-Pediatrics-red)
 
-## 📊 Dataset Overview
+## ✨ Features
 
+### 🎯 **Medical-Focused AI Assistant**
+- **Evidence-based responses** with Nelson Textbook citations
+- **Pediatric specialization** across 25+ medical domains
+- **Clinical decision support** for healthcare professionals
+- **Drug dosage calculations** by weight and age
+- **Emergency protocols** and resuscitation guidelines
+
+### 📱 **Modern Chat Interface**
+- **ChatGPT-inspired UI** with dark medical theme
+- **Real-time messaging** with typing indicators
+- **Markdown support** with syntax highlighting
+- **Citation display** with confidence scores
+- **Mobile-first responsive design**
+
+### 🔧 **PWA Capabilities**
+- **Offline functionality** with service worker caching
+- **App installation** on mobile and desktop
+- **Push notifications** for medical alerts
+- **Background sync** for offline actions
+- **Native app experience**
+
+### 🧠 **Advanced AI Integration**
+- **LangChain + LangGraph** for complex medical reasoning
+- **Mistral AI** for natural language generation
+- **Supabase vector search** for knowledge retrieval
+- **OpenAI embeddings** for semantic understanding
+- **Multi-agent orchestration** for specialized queries
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ or Bun
+- Supabase account
+- Mistral AI API key
+- OpenAI API key (for embeddings)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/DrZeepeads/pediatric-knowledge-world.git
+cd pediatric-knowledge-world
+
+# Install dependencies (choose one)
+npm install
+# or
+bun install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API keys
+
+# Start development server
+npm run dev
+# or
+bun dev
+```
+
+### Environment Setup
+
+```env
+# Required API Keys
+VITE_MISTRAL_API_KEY=your_mistral_api_key_here
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_OPENAI_API_KEY=your_openai_api_key_here
+
+# Optional Configuration
+VITE_MAX_CHAT_HISTORY=100
+VITE_RAG_MAX_CHUNKS=5
+VITE_ENABLE_CITATIONS=true
+```
+
+## 🏗️ Architecture
+
+### Frontend Stack
+- **React 19** - Latest React with concurrent features
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first styling with medical theme
+- **Framer Motion** - Smooth animations and transitions
+- **React Router** - Client-side routing
+- **Zustand** - Lightweight state management
+
+### Backend Integration
+- **Supabase** - PostgreSQL with pgvector for embeddings
+- **Mistral AI** - Large language model for responses
+- **OpenAI** - Text embeddings for semantic search
+- **LangChain** - AI application framework
+- **LangGraph** - Multi-agent workflow orchestration
+
+### PWA Features
+- **Vite PWA Plugin** - Service worker generation
+- **Workbox** - Advanced caching strategies
+- **Web App Manifest** - Native app installation
+- **Background Sync** - Offline functionality
+
+## 📊 RAG Pipeline & Knowledge Base
+
+### Dataset Overview
 - **Total Records**: 2,206 knowledge chunks
 - **Total Words**: 3,244,297 words  
 - **Specialties Covered**: 25 pediatric specialties
 - **Average Chunk Size**: ~1,471 words
 - **Source**: Nelson's Textbook of Pediatrics
 
-## 🏥 Medical Specialties Included
-
+### Medical Specialties Included
 1. **Allergic Disorders** (63 chunks)
 2. **Behavioral & Psychiatric Disorders** (62 chunks)
 3. **Bone and Joint Disorders** (126 chunks)
@@ -40,227 +142,205 @@ This repository contains processed pediatric knowledge data optimized for RAG (R
 24. **Learning & Developmental Disorders** (66 chunks)
 25. **Metabolic Disorders** (132 chunks)
 
-## 📁 Files Structure
+### Retrieval Process
+1. **Query Processing** - User input analysis and medical entity extraction
+2. **Embedding Generation** - Convert query to vector representation
+3. **Semantic Search** - Find relevant knowledge chunks in Supabase
+4. **Context Assembly** - Combine retrieved information with proper citations
+5. **Response Generation** - Mistral AI generates evidence-based answers
 
-```
-├── nelson_pediatric_knowledge_rag.csv    # Main RAG dataset
-├── supabase_schema.sql                   # Database schema for Supabase
-├── prepare_rag_data.py                   # Data processing script
-├── generate_embeddings.py                # Embedding generation script
-├── README.md                             # This file
-└── [Original text files...]              # Source Nelson textbook files
-```
+## 🎨 UI/UX Design
 
-## 🗃️ CSV Schema
+### Dark Medical Theme
+- **Background**: `#1e1e1e` (charcoal)
+- **Chat Container**: `#121212` (black)
+- **Medical Accent**: `#4a90e2` (blue)
+- **Text Primary**: `#f2f2f2` (light)
 
-The processed dataset includes the following fields optimized for RAG operations:
+### Responsive Design
+- **Mobile-first** approach with touch-optimized interactions
+- **Tablet and desktop** layouts with sidebar navigation
+- **Safe area insets** for modern mobile devices
+- **Accessibility** features with proper contrast ratios
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | UUID | Unique identifier for each chunk |
-| `content_id` | VARCHAR(12) | Hash-based content identifier |
-| `specialty` | VARCHAR(255) | Medical specialty category |
-| `section_title` | TEXT | Section or chapter title |
-| `section_number` | INTEGER | Section number within specialty |
-| `chunk_number` | INTEGER | Chunk number within section |
-| `content` | TEXT | Main content for RAG retrieval |
-| `word_count` | INTEGER | Number of words in chunk |
-| `character_count` | INTEGER | Number of characters in chunk |
-| `medical_entities` | TEXT | Extracted medical terms (pipe-separated) |
-| `source_file` | VARCHAR(255) | Original source file name |
-| `source_reference` | TEXT | Citation reference |
-| `content_type` | VARCHAR(50) | Type of content (medical_knowledge) |
-| `language` | VARCHAR(5) | Content language (en) |
-| `created_at` | TIMESTAMPTZ | Creation timestamp |
-| `updated_at` | TIMESTAMPTZ | Last update timestamp |
-| `is_active` | BOOLEAN | Active status flag |
-| `quality_score` | NUMERIC(5,2) | Content quality score (50-100) |
-| `embedding_status` | VARCHAR(20) | Embedding generation status |
-| `tags` | TEXT | Searchable tags |
+## 🔧 Medical Features
 
-## 🚀 Quick Start with Supabase
-
-### 1. Create Database Table
-
-```sql
--- Run the provided schema
-\i supabase_schema.sql
+### Drug Calculator
+```typescript
+// Calculate pediatric dosages
+const dosage = calculateDrugDosage({
+  drugName: 'Amoxicillin',
+  patientWeight: 15, // kg
+  patientAge: 2, // years
+  indication: 'Otitis Media'
+});
 ```
 
-### 2. Import Data
+### Symptom Analyzer
+```typescript
+// Analyze symptoms for differential diagnosis
+const analysis = analyzeSymptoms({
+  symptoms: ['fever', 'cough', 'difficulty breathing'],
+  ageGroup: 'toddler',
+  duration: '3 days'
+});
+```
 
+### Emergency Protocols
+```typescript
+// Access emergency resuscitation protocols
+const protocol = getEmergencyProtocol({
+  condition: 'Pediatric Cardiac Arrest',
+  ageGroup: 'infant',
+  weight: 8 // kg
+});
+```
+
+## 📱 PWA Installation
+
+### Mobile Installation
+1. Open NelsonGPT in your mobile browser
+2. Tap the "Install" prompt or browser menu
+3. Add to home screen for native app experience
+
+### Desktop Installation
+1. Visit NelsonGPT in Chrome/Edge
+2. Click the install icon in the address bar
+3. Confirm installation for desktop app
+
+## 🧪 Development
+
+### Project Structure
+```
+src/
+├── components/          # React components
+│   ├── Chat/           # Chat interface components
+│   ├── Layout/         # Layout and navigation
+│   ├── Medical/        # Medical-specific features
+│   ├── Markdown/       # Content rendering
+│   └── PWA/           # PWA-related components
+├── contexts/           # React contexts for state
+├── hooks/             # Custom React hooks
+├── services/          # API and external services
+├── types/             # TypeScript type definitions
+├── utils/             # Utility functions
+└── styles/            # CSS and styling
+```
+
+### Available Scripts
 ```bash
-# Upload CSV to Supabase
-# Option 1: Use Supabase Dashboard (recommended for smaller datasets)
-# Option 2: Use psql command
-\copy pediatric_knowledge(id,content_id,specialty,section_title,section_number,chunk_number,content,word_count,character_count,medical_entities,source_file,source_reference,content_type,language,created_at,updated_at,is_active,quality_score,embedding_status,tags) FROM 'nelson_pediatric_knowledge_rag.csv' DELIMITER ',' CSV HEADER;
+# Development
+npm run dev              # Start development server
+npm run build           # Build for production
+npm run preview         # Preview production build
+
+# Code Quality
+npm run lint            # ESLint code checking
+npm run type-check      # TypeScript type checking
+npm run format          # Prettier code formatting
+
+# Testing
+npm run test            # Run unit tests
+npm run test:ui         # Run tests with UI
+npm run coverage        # Generate test coverage
 ```
 
-### 3. Generate Embeddings
+### Medical Templates
+The application includes built-in medical templates for common queries:
 
-```python
-# Use the provided embedding generation script
-python3 generate_embeddings.py
-```
+- **Symptom Assessment** - Differential diagnosis workflows
+- **Drug Dosing** - Pediatric medication calculations
+- **Growth Assessment** - Development milestone evaluation
+- **Emergency Protocols** - Critical care procedures
 
-## 🔍 RAG Query Examples
+## 🗃️ Database Setup
 
-### Semantic Search (with embeddings)
+### Supabase Schema
 ```sql
+-- Create the main knowledge table
+CREATE TABLE pediatric_knowledge (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  content_id VARCHAR(12) UNIQUE NOT NULL,
+  specialty VARCHAR(255),
+  section_title TEXT,
+  content TEXT NOT NULL,
+  medical_entities TEXT,
+  source_reference TEXT,
+  quality_score NUMERIC(5,2),
+  embedding vector(1536),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Create indexes for performance
+CREATE INDEX idx_pediatric_specialty ON pediatric_knowledge(specialty);
+CREATE INDEX idx_pediatric_embedding ON pediatric_knowledge USING ivfflat (embedding vector_cosine_ops);
+```
+
+### RAG Query Examples
+```sql
+-- Semantic search with embeddings
 SELECT content, specialty, section_title, source_reference
 FROM pediatric_knowledge
 WHERE is_active = TRUE
 ORDER BY embedding <-> $1  -- $1 is the query embedding
 LIMIT 10;
-```
 
-### Keyword Search with Ranking
-```sql
-SELECT content, specialty, section_title, 
-       ts_rank(to_tsvector('english', content), plainto_tsquery('english', $1)) as rank
-FROM pediatric_knowledge
-WHERE is_active = TRUE 
-  AND to_tsvector('english', content) @@ plainto_tsquery('english', $1)
-ORDER BY rank DESC
-LIMIT 10;
-```
-
-### Specialty-Specific Search
-```sql
+-- Specialty-specific search
 SELECT * FROM pediatric_knowledge
 WHERE specialty = 'The Cardiovascular System'
-  AND is_active = TRUE
   AND to_tsvector('english', content) @@ plainto_tsquery('english', 'heart defect')
 ORDER BY quality_score DESC;
 ```
 
-## 🤖 Integration with Nelson-GPT
+## 🔒 Security & Privacy
 
-### RAG Pipeline Architecture
+### Data Protection
+- **No PHI storage** - Patient identifiers are not stored
+- **Secure API communication** - All requests use HTTPS
+- **Local data encryption** - Chat history encrypted in browser
+- **HIPAA considerations** - Designed for educational use
 
-```python
-# Example RAG implementation
-async def get_relevant_context(query: str, specialty: str = None):
-    # 1. Generate query embedding
-    query_embedding = await generate_embedding(query)
-    
-    # 2. Semantic search
-    results = await supabase.rpc('similarity_search', {
-        'query_embedding': query_embedding,
-        'specialty_filter': specialty,
-        'limit': 5
-    })
-    
-    # 3. Format context with citations
-    context = []
-    for result in results:
-        context.append({
-            'content': result['content'],
-            'citation': f"Nelson's Textbook of Pediatrics - {result['specialty']}, {result['section_title']}",
-            'confidence': result['similarity']
-        })
-    
-    return context
-```
-
-### Citation Format
-
-All responses should include proper citations:
-```
-"According to Nelson's Textbook of Pediatrics - The Cardiovascular System, Section on Congenital Heart Disease..."
-```
-
-## 🔧 Advanced Features
-
-### Medical Entity Extraction
-Each chunk includes extracted medical entities for enhanced searchability:
-- Medical conditions and syndromes
-- Diagnostic terms
-- Treatment modalities
-- Medication references
-- Measurement units
-
-### Quality Scoring
-Content quality is scored based on:
-- Word count (longer chunks generally more comprehensive)
-- Medical entity density
-- Structural completeness
-
-### Chunking Strategy
-- **Chunk Size**: ~1,500 words with 200-word overlap
-- **Boundary Respect**: Chunks end at sentence boundaries
-- **Context Preservation**: Overlapping chunks maintain context continuity
-
-## 📈 Performance Optimization
-
-### Database Indexes
-- Specialty filtering: `idx_pediatric_specialty`
-- Active content: `idx_pediatric_active`
-- Quality ranking: `idx_pediatric_quality`
-- Full-text search: `idx_pediatric_content_search`
-- Medical entities: `idx_pediatric_medical_entities`
-
-### Embedding Considerations
-- **Recommended Model**: OpenAI text-embedding-3-large (3072 dimensions)
-- **Alternative**: text-embedding-ada-002 (1536 dimensions)
-- **Batch Processing**: Process embeddings in batches of 100-500 chunks
-
-## 🔒 Security & Compliance
-
-### Medical Information Handling
-- All content is from published medical textbooks
-- No patient-specific information included
-- Suitable for educational and clinical decision support
-- Always recommend consulting primary sources and clinical judgment
-
-### Data Privacy
-- No personal health information (PHI)
-- Educational content only
-- Proper attribution to Nelson's Textbook of Pediatrics
-
-## 🛠️ Development & Maintenance
-
-### Updating Content
-```python
-# Re-run processing script when source files change
-python3 prepare_rag_data.py
-
-# Regenerate embeddings for updated content
-python3 generate_embeddings.py --update-only
-```
-
-### Monitoring
-- Track embedding generation status
-- Monitor query performance
-- Update quality scores based on usage patterns
-
-## 📚 Citation Requirements
-
-When using this dataset, please ensure proper attribution:
-
-> "Powered by Nelson's Textbook of Pediatrics - the authoritative reference for pediatric medicine, providing evidence-based clinical guidance for healthcare professionals."
+### Medical Disclaimer
+⚠️ **IMPORTANT**: NelsonGPT is for educational purposes only and should not replace professional medical judgment. Always verify information with current clinical guidelines and consult healthcare professionals for patient care decisions.
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/improvement`)
-3. Commit changes (`git commit -am 'Add improvement'`)
-4. Push to branch (`git push origin feature/improvement`)
-5. Create Pull Request
+We welcome contributions from the medical and developer communities:
+
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Commit your changes** (`git commit -m 'Add amazing feature'`)
+4. **Push to the branch** (`git push origin feature/amazing-feature`)
+5. **Open a Pull Request**
+
+### Contribution Guidelines
+- Follow TypeScript best practices
+- Maintain medical accuracy and proper citations
+- Include tests for new features
+- Update documentation as needed
 
 ## 📄 License
 
-This dataset is processed from Nelson's Textbook of Pediatrics for educational and clinical decision support purposes. Please ensure compliance with applicable copyright and licensing terms.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
+## 🙏 Acknowledgments
 
-For issues related to:
-- **Data Processing**: Check `prepare_rag_data.py` logs
-- **Database Setup**: Review `supabase_schema.sql`
-- **Embeddings**: Use `generate_embeddings.py` with debug mode
-- **RAG Integration**: See example queries above
+- **Nelson Textbook of Pediatrics** - Primary medical knowledge source
+- **Mistral AI** - Language model capabilities
+- **Supabase** - Backend infrastructure
+- **React Team** - Frontend framework
+- **Medical Community** - Feedback and validation
+
+## 📞 Support
+
+For support, questions, or medical content verification:
+- **GitHub Issues** - Technical problems and feature requests
+- **Discussions** - General questions and community support
+- **Medical Review** - Content accuracy and clinical validation
 
 ---
 
-**Nelson-GPT**: Empowering pediatric healthcare with AI-driven knowledge access 🏥✨
+**Built with ❤️ for pediatric healthcare professionals worldwide**
+
+*NelsonGPT - Empowering pediatric care through AI-assisted medical knowledge*
 
