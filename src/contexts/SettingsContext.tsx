@@ -261,7 +261,7 @@ const builtInTemplates: MedicalTemplate[] = [
 ]
 
 // Context
-const SettingsContext = createContext<SettingsContextType | undefined>(undefined)
+export const SettingsContext = createContext<SettingsContextType | undefined>(undefined)
 
 // Provider component
 export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -416,4 +416,3 @@ export const useSettings = (): SettingsContextType => {
   }
   return context
 }
-
