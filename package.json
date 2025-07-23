@@ -12,7 +12,9 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "test-connection": "node test-connection.js",
+    "setup": "echo '🚀 Setting up NelsonGPT...' && npm install && npm run test-connection"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -35,7 +37,9 @@
     "date-fns": "^2.30.0",
     "uuid": "^9.0.1",
     "react-hot-toast": "^2.4.1",
-    "workbox-window": "^7.0.0"
+    "workbox-window": "^7.0.0",
+    "node-fetch": "^3.3.2",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
@@ -77,4 +81,3 @@
     "npm": ">=9.0.0"
   }
 }
-
