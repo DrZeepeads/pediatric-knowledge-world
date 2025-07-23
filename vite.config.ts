@@ -137,14 +137,13 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           markdown: ['react-markdown', 'prismjs'],
-          langchain: ['langchain', 'langgraph'],
+          supabase: ['@supabase/supabase-js'],
           ui: ['lucide-react', 'framer-motion']
         }
       }
     }
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'langchain', 'langgraph']
+    include: ['react', 'react-dom', '@supabase/supabase-js']
   }
 })
-

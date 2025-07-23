@@ -21,8 +21,6 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.20.1",
-    "langchain": "^0.0.208",
-    "langgraph": "^0.0.26",
     "@supabase/supabase-js": "^2.38.4",
     "prismjs": "^1.29.0",
     "react-syntax-highlighter": "^15.5.0",
