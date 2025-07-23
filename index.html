@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- Primary Meta Tags -->
+    <title>NelsonGPT - Pediatric Medical Assistant</title>
+    <meta name="title" content="NelsonGPT - Pediatric Medical Assistant" />
+    <meta name="description" content="Evidence-based pediatric medical assistant powered by the Nelson Textbook of Pediatrics. For pediatricians, consultants, residents, and medical students." />
+    <meta name="keywords" content="pediatrics, medical assistant, AI, Nelson textbook, clinical decision support, pediatric medicine" />
+    <meta name="author" content="NelsonGPT Team" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nelson-gpt.app/" />
+    <meta property="og:title" content="NelsonGPT - Pediatric Medical Assistant" />
+    <meta property="og:description" content="Evidence-based pediatric medical assistant powered by the Nelson Textbook of Pediatrics" />
+    <meta property="og:image" content="/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://nelson-gpt.app/" />
+    <meta property="twitter:title" content="NelsonGPT - Pediatric Medical Assistant" />
+    <meta property="twitter:description" content="Evidence-based pediatric medical assistant powered by the Nelson Textbook of Pediatrics" />
+    <meta property="twitter:image" content="/twitter-image.png" />
+    
+    <!-- Apple Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="NelsonGPT" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    
+    <!-- Microsoft Meta Tags -->
+    <meta name="msapplication-TileColor" content="#1e1e1e" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1e1e1e" />
+    <meta name="color-scheme" content="dark" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://api.mistral.ai" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    
+    <!-- Medical Disclaimer -->
+    <meta name="medical-disclaimer" content="This tool is for educational purposes only and should not replace professional medical judgment." />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    
+    <!-- Splash Screen Styles -->
+    <style>
+      /* Splash Screen */
+      #splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #121212;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        font-family: 'Inter', sans-serif;
+      }
+      
+      #splash-screen h1 {
+        color: #f2f2f2;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        text-align: center;
+        letter-spacing: -0.025em;
+      }
+      
+      #splash-screen p {
+        color: #b3b3b3;
+        font-size: 1rem;
+        margin: 1rem 0 2rem 0;
+        text-align: center;
+        max-width: 300px;
+        line-height: 1.5;
+      }
+      
+      .loading-dots {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      
+      .loading-dots div {
+        width: 8px;
+        height: 8px;
+        background-color: #4a90e2;
+        border-radius: 50%;
+        animation: loading-pulse 1.4s ease-in-out infinite both;
+      }
+      
+      .loading-dots div:nth-child(1) { animation-delay: -0.32s; }
+      .loading-dots div:nth-child(2) { animation-delay: -0.16s; }
+      .loading-dots div:nth-child(3) { animation-delay: 0s; }
+      
+      @keyframes loading-pulse {
+        0%, 80%, 100% {
+          transform: scale(0.8);
+          opacity: 0.5;
+        }
+        40% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      
+      /* Hide splash screen when app loads */
+      .app-loaded #splash-screen {
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+        pointer-events: none;
+      }
+      
+      /* Prevent flash of unstyled content */
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #1e1e1e;
+        color: #f2f2f2;
+        font-family: 'Inter', sans-serif;
+        overflow: hidden;
+      }
+      
+      #root {
+        opacity: 0;
+        transition: opacity 0.3s ease-in;
+      }
+      
+      .app-loaded #root {
+        opacity: 1;
+      }
+      
+      .app-loaded body {
+        overflow: auto;
+      }
+      
+      /* Mobile viewport fix */
+      @media screen and (max-width: 768px) {
+        body {
+          -webkit-text-size-adjust: 100%;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+      <h1>NelsonGPT</h1>
+      <p>Evidence-based pediatric medical assistant</p>
+      <div class="loading-dots">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    
+    <!-- App Root -->
+    <div id="root"></div>
+    
+    <!-- App Loading Script -->
+    <script>
+      // Remove splash screen when app is ready
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          document.body.classList.add('app-loaded');
+          setTimeout(() => {
+            const splash = document.getElementById('splash-screen');
+            if (splash) {
+              splash.remove();
+            }
+          }, 300);
+        }, 1000); // Minimum splash screen duration
+      });
+      
+      // Service Worker Registration
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+      
+      // PWA Install Prompt
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        // Show install button
+        const installButton = document.querySelector('#install-button');
+        if (installButton) {
+          installButton.style.display = 'block';
+        }
+      });
+      
+      // Handle app installed
+      window.addEventListener('appinstalled', () => {
+        console.log('NelsonGPT was installed');
+        deferredPrompt = null;
+      });
+    </script>
+    
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
